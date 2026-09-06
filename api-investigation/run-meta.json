@@ -1,0 +1,18 @@
+{
+  "investigated_at": "2026-09-05T21:09:29.013706+00:00",
+  "base": "https://nibssbyphoenix.onrender.com",
+  "synthetic": {
+    "name_a": "Phoenix Test Fintech",
+    "email_a": "phoenix.test.fintech.1788642569@example.test",
+    "name_b": "Phoenix Test Fintech B",
+    "email_b": "phoenix.test.fintech.b.1788642569@example.test",
+    "bvn_sender": "91788642569",
+    "bvn_recv": "81788642569",
+    "nin_a": "71788642569",
+    "nin_b": "61788642569",
+    "dob_sender": "1995-06-15",
+    "dob_recv": "1992-03-20",
+    "dob_nin": "1990-01-01",
+    "note": "All identity values are synthetic test data, not real people."
+  }
+}

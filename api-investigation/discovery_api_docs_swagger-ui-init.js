@@ -1,0 +1,515 @@
+
+window.onload = function() {
+  // Build a system
+  var url = window.location.search.match(/url=([^&]+)/);
+  if (url && url.length > 1) {
+    url = decodeURIComponent(url[1]);
+  } else {
+    url = window.location.origin;
+  }
+  var options = {
+  "swaggerDoc": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "NibbsByPhoenix API",
+      "version": "1.0.0"
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
+    "paths": {
+      "/api/auth/token": {
+        "post": {
+          "summary": "Generate JWT token",
+          "tags": [
+            "Fintech"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiKey": {
+                      "type": "string"
+                    },
+                    "apiSecret": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Token generated"
+            }
+          }
+        }
+      },
+      "/api/fintech/onboard": {
+        "post": {
+          "summary": "Onboard a fintech",
+          "tags": [
+            "Fintech"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Fintech onboarded"
+            }
+          }
+        }
+      },
+      "/api/account/create": {
+        "post": {
+          "summary": "Create account using KYC",
+          "tags": [
+            "Account"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "kycType",
+                    "kycID",
+                    "dob"
+                  ],
+                  "properties": {
+                    "kycType": {
+                      "type": "string",
+                      "example": "BVN"
+                    },
+                    "kycID": {
+                      "type": "string",
+                      "example": "12345678901"
+                    },
+                    "dob": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "1995-06-15"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Account created successfully"
+            }
+          }
+        }
+      },
+      "/api/account/name-enquiry/{accountNumber}": {
+        "get": {
+          "summary": "Get account name",
+          "tags": [
+            "Fintech"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "accountNumber",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Account details"
+            }
+          }
+        }
+      },
+      "/api/transfer": {
+        "post": {
+          "summary": "Transfer funds",
+          "tags": [
+            "Fintech"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "from": {
+                      "type": "string"
+                    },
+                    "to": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Transfer successful"
+            }
+          }
+        }
+      },
+      "/api/transaction/{ref}": {
+        "get": {
+          "summary": "Get transaction by reference",
+          "tags": [
+            "Fintech"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "ref",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Transaction found"
+            }
+          }
+        }
+      },
+      "/api/accounts": {
+        "get": {
+          "summary": "Get all fintech accounts",
+          "tags": [
+            "Fintech"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of accounts"
+            }
+          }
+        }
+      },
+      "/api/account/balance/{accountNumber}": {
+        "get": {
+          "summary": "Get account balance",
+          "tags": [
+            "Fintech"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "accountNumber",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Account balance"
+            }
+          }
+        }
+      },
+      "/api/insertBvn": {
+        "post": {
+          "summary": "Insert a new BVN",
+          "tags": [
+            "BVN"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "bvn",
+                    "firstName",
+                    "lastName",
+                    "dob",
+                    "phone"
+                  ],
+                  "properties": {
+                    "bvn": {
+                      "type": "string",
+                      "example": "12345678901"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "John"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Doe"
+                    },
+                    "dob": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "1990-01-01"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "example": "08012345678"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "BVN created successfully"
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/api/validateBvn": {
+        "post": {
+          "summary": "Validate a BVN",
+          "tags": [
+            "bvn"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "bvn"
+                  ],
+                  "properties": {
+                    "bvn": {
+                      "type": "string",
+                      "example": "12345678901"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "BVN is valid"
+            },
+            "404": {
+              "description": "BVN not found"
+            }
+          }
+        }
+      },
+      "/api/insertNin": {
+        "post": {
+          "summary": "Create a NIN record",
+          "tags": [
+            "NIN"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "nin",
+                    "firstName",
+                    "lastName",
+                    "dob"
+                  ],
+                  "properties": {
+                    "nin": {
+                      "type": "string",
+                      "example": "12345678901"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Jane"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Doe"
+                    },
+                    "dob": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "1995-05-10"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "NIN created successfully"
+            }
+          }
+        }
+      },
+      "/api/validateNin": {
+        "post": {
+          "summary": "Validate a NIN",
+          "tags": [
+            "NIN"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "nin"
+                  ],
+                  "properties": {
+                    "nin": {
+                      "type": "string",
+                      "example": "12345678901"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "NIN verified"
+            },
+            "400": {
+              "description": "Invalid NIN"
+            }
+          }
+        }
+      }
+    },
+    "tags": [
+      {
+        "name": "Fintech",
+        "description": "Fintech Operations"
+      },
+      {
+        "name": "BVN",
+        "description": "BVN Management"
+      },
+      {
+        "name": "NIN",
+        "description": "NIN Management"
+      }
+    ]
+  },
+  "customOptions": {}
+};
+  url = options.swaggerUrl || url
+  var urls = options.swaggerUrls
+  var customOptions = options.customOptions
+  var spec1 = options.swaggerDoc
+  var swaggerOptions = {
+    spec: spec1,
+    url: url,
+    urls: urls,
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  }
+  for (var attrname in customOptions) {
+    swaggerOptions[attrname] = customOptions[attrname];
+  }
+  var ui = SwaggerUIBundle(swaggerOptions)
+
+  if (customOptions.oauth) {
+    ui.initOAuth(customOptions.oauth)
+  }
+
+  if (customOptions.preauthorizeApiKey) {
+    const key = customOptions.preauthorizeApiKey.authDefinitionKey;
+    const value = customOptions.preauthorizeApiKey.apiKeyValue;
+    if (!!key && !!value) {
+      const pid = setInterval(() => {
+        const authorized = ui.preauthorizeApiKey(key, value);
+        if(!!authorized) clearInterval(pid);
+      }, 500)
+
+    }
+  }
+
+  if (customOptions.authAction) {
+    ui.authActions.authorize(customOptions.authAction)
+  }
+
+  window.ui = ui
+}

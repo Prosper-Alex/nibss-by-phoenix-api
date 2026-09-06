@@ -1,0 +1,4 @@
+{
+  "success": false,
+  "message": "Invalid BVN format. BVN must be exactly 11 digits."
+}

@@ -1,0 +1,15 @@
+{
+  "amount": 2500,
+  "before_sender": 15000,
+  "after_sender": 12500,
+  "expected_sender": 12500,
+  "sender_ok": true,
+  "before_recipient": 15000,
+  "after_recipient": 17500,
+  "expected_recipient": 17500,
+  "recipient_ok": true,
+  "balance_types": {
+    "before_sender": "int",
+    "after_sender": "int"
+  }
+}

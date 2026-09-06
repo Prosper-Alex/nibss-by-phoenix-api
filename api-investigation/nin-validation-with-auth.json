@@ -1,0 +1,12 @@
+{
+  "message": "NIN Verified!!",
+  "response": {
+    "_id": "6a9c8525f312e78be711935d",
+    "nin": "71788642569",
+    "firstName": "Bola",
+    "lastName": "Testperson",
+    "dob": "1990-01-01T00:00:00.000Z",
+    "createdAt": "2026-09-05T21:09:57.945Z",
+    "updatedAt": "2026-09-05T21:09:57.945Z"
+  }
+}

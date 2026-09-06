@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "message": "BVN record created successfully.",
+  "data": {
+    "bvn": "81788642569",
+    "firstName": "Chidi",
+    "lastName": "Testperson",
+    "dob": "1992-03-20T00:00:00.000Z",
+    "phone": "08000000002",
+    "createdAt": "2026-09-05T21:09:55.743Z"
+  }
+}

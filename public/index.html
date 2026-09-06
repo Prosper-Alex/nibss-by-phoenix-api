@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIBSS Fintech Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-brand">🏦 NIBSS Fintech Portal</div>
+    <div id="nav-fintech-info" class="hidden">
+      <span id="fintech-name"></span> (<span id="fintech-bank-code"></span>)
+      <button id="logout-btn" class="btn-sm">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Login Section -->
+  <section id="login-section" class="container">
+    <div class="card">
+      <h2>Fintech Login</h2>
+      <p class="subtitle">Enter your API credentials to access the NIBSS portal</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label>API Key</label>
+          <input type="text" id="api-key" required placeholder="e.g. e4e31b4a5fe123175f31747f06463038">
+        </div>
+        <div class="form-group">
+          <label>API Secret</label>
+          <input type="password" id="api-secret" required placeholder="e.g. 510fbd57417278f31fdd8ae939a50f58746b963b28e24ee21a883cc3c5b776f0">
+        </div>
+        <button type="submit" class="btn-primary">Authenticate</button>
+        <div id="login-error" class="error-msg hidden"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard-section" class="container hidden">
+    
+    <div class="dashboard-grid">
+      <!-- Accounts Panel -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Customer Accounts</h2>
+          <button id="refresh-accounts-btn" class="btn-sm">Refresh</button>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Account Name</th>
+              <th>Account Number</th>
+              <th>Balance (₦)</th>
+            </tr>
+          </thead>
+          <tbody id="accounts-table-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Actions Panel -->
+      <div class="card-column">
+        
+        <!-- Create Account -->
+        <div class="card">
+          <h2>Create Account</h2>
+          <form id="create-account-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>KYC Type</label>
+                <select id="kyc-type">
+                  <option value="bvn">BVN</option>
+                  <option value="nin">NIN</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>KYC ID</label>
+                <input type="text" id="kyc-id" required placeholder="11 digits">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input type="date" id="kyc-dob" required>
+            </div>
+            <button type="submit" class="btn-secondary">Create Account</button>
+            <div id="create-msg" class="form-msg"></div>
+          </form>
+        </div>
+
+        <!-- Interbank Transfer -->
+        <div class="card">
+          <h2>Interbank Transfer</h2>
+          <form id="transfer-form">
+            <div class="form-group">
+              <label>From Account (Yours)</label>
+              <select id="transfer-from" required>
+                <!-- Populated by JS -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label>To Account (Recipient)</label>
+              <input type="text" id="transfer-to" required placeholder="10-digit NUBAN">
+            </div>
+            <div class="form-group">
+              <label>Amount (₦)</label>
+              <input type="number" id="transfer-amount" required min="1">
+            </div>
+            <button type="submit" class="btn-primary">Send Funds</button>
+            <div id="transfer-msg" class="form-msg"></div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

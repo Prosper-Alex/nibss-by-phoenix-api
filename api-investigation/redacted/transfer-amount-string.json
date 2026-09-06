@@ -1,0 +1,10 @@
+{
+  "reference": "TX1788642652330",
+  "senderAccount": "3589906532",
+  "receiverAccount": "3586761354",
+  "amount": 100,
+  "status": "SUCCESS",
+  "_id": "6a9c855cf312e78be7119363",
+  "createdAt": "2026-09-05T21:10:52.330Z",
+  "updatedAt": "2026-09-05T21:10:52.330Z"
+}

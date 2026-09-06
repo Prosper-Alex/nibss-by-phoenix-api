@@ -1,0 +1,15 @@
+HTTP/2 301 
+date: Sat, 05 Sep 2026 21:05:04 GMT
+content-type: text/html; charset=UTF-8
+cf-cache-status: DYNAMIC
+content-security-policy: default-src 'none'
+location: /api/docs/
+rndr-id: 58a70022-ba87-43ec
+server: cloudflare
+vary: Accept-Encoding
+x-content-type-options: nosniff
+x-powered-by: Express
+x-render-origin-server: Render
+cf-ray: a36830a06c47ed05-AMS
+alt-svc: h3=":443"; ma=86400
+

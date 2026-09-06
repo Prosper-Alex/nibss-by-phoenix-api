@@ -1,0 +1,128 @@
+:root {
+  --primary-color: #2563eb;     /* Deep blue for a banking feel */
+  --primary-hover: #1d4ed8;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --error-color: #ef4444;
+  --success-color: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(to right, #1e3a8a, #2563eb);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+#nav-fintech-info {
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-weight: 500;
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  border: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.card h2 { margin-bottom: 0.5rem; font-size: 1.25rem; color: #1e293b; }
+.subtitle { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+
+/* Layout Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+}
+.card-column { display: flex; flex-direction: column; }
+
+/* Forms */
+.form-group { margin-bottom: 1.25rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: #475569; }
+input, select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.btn-primary { background-color: var(--primary-color); color: white; padding: 0.75rem 1rem; width: 100%; font-size: 1rem; }
+.btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+.btn-secondary { background-color: #f1f5f9; color: #334155; padding: 0.75rem 1rem; width: 100%; font-size: 1rem; border: 1px solid #cbd5e1; }
+.btn-secondary:hover { background-color: #e2e8f0; }
+.btn-sm { background-color: rgba(255,255,255,0.2); color: white; padding: 0.4rem 1rem; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.4); }
+.btn-sm:hover { background-color: rgba(255,255,255,0.3); }
+
+#refresh-accounts-btn {
+    background-color: var(--primary-color);
+    border: none;
+}
+#refresh-accounts-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Tables */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+.data-table th { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; background-color: #f8fafc; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover { background-color: #f1f5f9; }
+
+/* Messages */
+.error-msg { color: var(--error-color); font-size: 0.85rem; margin-top: 0.75rem; text-align: center; font-weight: 500; background-color: #fef2f2; padding: 0.5rem; border-radius: 4px; }
+.form-msg { font-size: 0.9rem; margin-top: 0.75rem; text-align: center; font-weight: 600; padding: 0.5rem; border-radius: 4px;}
+.success-msg { color: var(--success-color); background-color: #ecfdf5; }

@@ -1,0 +1,316 @@
+[
+  {
+    "endpoint": "GET /api/fintech/onboard",
+    "test": "GET on POST-only onboard",
+    "status": 404,
+    "response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /api/fintech/onboard</pre>\n</body>\n</html>\n"
+  },
+  {
+    "endpoint": "POST /api/accounts",
+    "test": "POST on GET-only accounts",
+    "status": 404,
+    "response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot POST /api/accounts</pre>\n</body>\n</html>\n"
+  },
+  {
+    "endpoint": "POST /api/fintech/onboard",
+    "test": "onboard missing all fields",
+    "status": 500,
+    "response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Internal Server Error</pre>\n</body>\n</html>\n"
+  },
+  {
+    "endpoint": "POST /api/fintech/onboard",
+    "test": "onboard invalid email",
+    "status": 400,
+    "response": {
+      "message": "Invalid email"
+    }
+  },
+  {
+    "endpoint": "POST /api/fintech/onboard",
+    "test": "duplicate fintech email",
+    "status": 400,
+    "response": {
+      "apiKey": "cfe3ef21a76499c8af961310afffe43f",
+      "apiSecret": "3692c13c0c6909c34e1de7826a13888ecb787f4ee1ac498de0367f4749842cc8",
+      "bankCode": "358",
+      "bankName": "PHO Bank Metro",
+      "message": "Fintech already onboarded"
+    }
+  },
+  {
+    "endpoint": "POST /api/auth/token",
+    "test": "login missing credentials",
+    "status": 401,
+    "response": {
+      "message": "Invalid credentials"
+    }
+  },
+  {
+    "endpoint": "POST /api/auth/token",
+    "test": "login invalid API credentials",
+    "status": 401,
+    "response": {
+      "message": "Invalid credentials"
+    }
+  },
+  {
+    "endpoint": "GET /api/accounts",
+    "test": "missing Authorization header",
+    "status": 401,
+    "response": {
+      "message": "No token provided"
+    }
+  },
+  {
+    "endpoint": "GET /api/accounts",
+    "test": "invalid JWT",
+    "status": 401,
+    "response": {
+      "message": "Invalid or expired token"
+    }
+  },
+  {
+    "endpoint": "GET /api/accounts",
+    "test": "Authorization without Bearer prefix",
+    "status": 401,
+    "response": {
+      "message": "No token provided"
+    }
+  },
+  {
+    "endpoint": "POST /api/insertBvn",
+    "test": "insertBvn invalid format",
+    "status": 400,
+    "response": {
+      "success": false,
+      "message": "Invalid BVN format. BVN must be exactly 11 digits."
+    }
+  },
+  {
+    "endpoint": "POST /api/insertBvn",
+    "test": "insertBvn missing fields",
+    "status": 400,
+    "response": {
+      "success": false,
+      "message": "Invalid BVN format. BVN must be exactly 11 digits."
+    }
+  },
+  {
+    "endpoint": "POST /api/insertBvn",
+    "test": "duplicate BVN identity",
+    "status": 409,
+    "response": {
+      "success": false,
+      "message": "BVN already exists in the system."
+    }
+  },
+  {
+    "endpoint": "POST /api/insertNin",
+    "test": "insertNin missing fields",
+    "status": 400,
+    "response": {
+      "error": "All fields are required"
+    }
+  },
+  {
+    "endpoint": "POST /api/insertNin",
+    "test": "duplicate NIN identity",
+    "status": 400,
+    "response": {
+      "error": "NIN already exists for another user, Please provide a different one"
+    }
+  },
+  {
+    "endpoint": "POST /api/insertNin",
+    "test": "insertNin invalid format",
+    "status": 400,
+    "response": {
+      "error": "NIN must have ONLY 11 digits"
+    }
+  },
+  {
+    "endpoint": "POST /api/validateBvn",
+    "test": "validateBvn nonexistent",
+    "status": 200,
+    "response": {
+      "success": true,
+      "message": "BVN validation successful.",
+      "data": {
+        "bvn": "00000000000",
+        "firstName": "Babana",
+        "lastName": "Yangogi",
+        "dob": "1999-08-08T00:00:00.000Z",
+        "phone": "08036278391"
+      }
+    }
+  },
+  {
+    "endpoint": "POST /api/validateBvn",
+    "test": "validateBvn invalid format",
+    "status": 400,
+    "response": {
+      "success": false,
+      "message": "Invalid BVN format. BVN must be exactly 11 digits."
+    }
+  },
+  {
+    "endpoint": "POST /api/validateNin",
+    "test": "validateNin unregistered",
+    "status": 400,
+    "response": {
+      "error": "NIN is not registered. Kindly register your NIN"
+    }
+  },
+  {
+    "endpoint": "POST /api/validateNin",
+    "test": "validateNin missing field",
+    "status": 400,
+    "response": {
+      "error": "NIN must be provided"
+    }
+  },
+  {
+    "endpoint": "POST /api/account/create",
+    "test": "account create missing Authorization",
+    "status": 401,
+    "response": {
+      "message": "No token provided"
+    }
+  },
+  {
+    "endpoint": "POST /api/account/create",
+    "test": "account create missing required fields",
+    "status": 400,
+    "response": {
+      "message": "kycType, kycID and DOB are required"
+    }
+  },
+  {
+    "endpoint": "POST /api/account/create",
+    "test": "account create invalid kycType",
+    "status": 400,
+    "response": {
+      "message": "Invalid kycType. Use BVN or NIN"
+    }
+  },
+  {
+    "endpoint": "POST /api/account/create",
+    "test": "account create unknown BVN",
+    "status": 400,
+    "response": {
+      "message": "bvn and DOB do not match"
+    }
+  },
+  {
+    "endpoint": "POST /api/account/create",
+    "test": "account create DOB mismatch",
+    "status": 400,
+    "response": {
+      "message": "bvn and DOB do not match"
+    }
+  },
+  {
+    "endpoint": "POST /api/account/create",
+    "test": "duplicate KYC identity on same fintech",
+    "status": 400,
+    "response": {
+      "message": "bvn already linked to an account"
+    }
+  },
+  {
+    "endpoint": "GET /api/account/name-enquiry/0000000000",
+    "test": "name enquiry nonexistent account",
+    "status": 404,
+    "response": {
+      "message": "Account not found"
+    }
+  },
+  {
+    "endpoint": "GET /api/account/balance/0000000000",
+    "test": "balance nonexistent account",
+    "status": 404,
+    "response": {
+      "message": "Account not found"
+    }
+  },
+  {
+    "endpoint": "POST /api/transfer",
+    "test": "transfer missing Authorization",
+    "status": 401,
+    "response": {
+      "message": "No token provided"
+    }
+  },
+  {
+    "endpoint": "POST /api/transfer",
+    "test": "transfer missing required fields",
+    "status": 400,
+    "response": {
+      "message": "Both sender (from) and receiver (to) account numbers are required"
+    }
+  },
+  {
+    "endpoint": "POST /api/transfer",
+    "test": "transfer invalid negative amount",
+    "status": 400,
+    "response": {
+      "message": "Amount must be greater than zero"
+    }
+  },
+  {
+    "endpoint": "POST /api/transfer",
+    "test": "transfer non-numeric amount",
+    "status": 400,
+    "response": {
+      "message": "Invalid amount"
+    }
+  },
+  {
+    "endpoint": "POST /api/transfer",
+    "test": "transfer to same account",
+    "status": 400,
+    "response": {
+      "message": "You cannot transfer to the same account"
+    }
+  },
+  {
+    "endpoint": "POST /api/transfer",
+    "test": "transfer nonexistent sender",
+    "status": 404,
+    "response": {
+      "message": "Invalid account"
+    }
+  },
+  {
+    "endpoint": "POST /api/transfer",
+    "test": "insufficient funds",
+    "status": 400,
+    "response": {
+      "message": "Insufficient funds"
+    }
+  },
+  {
+    "endpoint": "POST /api/transfer",
+    "test": "transfer sender not owned by authenticated fintech",
+    "status": 401,
+    "response": {
+      "message": "No token provided"
+    }
+  },
+  {
+    "endpoint": "GET /api/transaction/TX-DOES-NOT-EXIST",
+    "test": "invalid/nonexistent transaction ID",
+    "status": 404,
+    "response": {
+      "message": "Not found"
+    }
+  },
+  {
+    "endpoint": "GET /api/transaction/TX-DOES-NOT-EXIST",
+    "test": "transaction lookup missing Authorization",
+    "status": 401,
+    "response": {
+      "message": "No token provided"
+    }
+  }
+]

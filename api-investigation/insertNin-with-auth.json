@@ -1,0 +1,12 @@
+{
+  "message": "NIN Profile Created Successfully",
+  "response": {
+    "nin": "61788642569",
+    "firstName": "Emeka",
+    "lastName": "Testperson",
+    "dob": "1990-01-01T00:00:00.000Z",
+    "_id": "6a9c8527f312e78be711935e",
+    "createdAt": "2026-09-05T21:09:59.147Z",
+    "updatedAt": "2026-09-05T21:09:59.147Z"
+  }
+}

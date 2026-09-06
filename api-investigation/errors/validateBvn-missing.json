@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "BVN validation successful.",
+  "data": {
+    "bvn": "00000000000",
+    "firstName": "Babana",
+    "lastName": "Yangogi",
+    "dob": "1999-08-08T00:00:00.000Z",
+    "phone": "08036278391"
+  }
+}
